@@ -1,0 +1,27 @@
+.enterword {
+    border-bottom: 1px dotted black;
+}
+
+.hide {
+    display: none;
+}
+
+.enterword:hover+.hide {
+    display: block;
+    background-color: wheat;
+    color: black;
+    border-radius: 6px;
+    padding: 0.5em;
+    position: absolute;
+    z-index: 1;
+    /* color: red; */
+}
+
+.bloc-current-phrase {
+    padding: 1em;
+    line-height: 2em;
+}
+
+.cadavre-button {
+    margin-left: 1em;
+}

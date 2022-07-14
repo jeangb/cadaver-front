@@ -1,0 +1,24 @@
+.mat-column-id {
+    width: 0.5em;
+    border-right: 1px solid currentColor;
+    padding-right: 0.5em;
+    text-align: center;
+}
+
+.mat-column-auteurs {
+    padding-left: 16px;
+    font-size: 15px;
+}
+
+.mat-column-phrase {
+    padding-left: 3em;
+    /* margin-left: 32px; */
+    font-size: large;
+    font-style: italic;
+    width: 80%;
+    background: url('../../assets/images/blockquote.png');
+    background-size: 1.1em 1em;
+    background-repeat: no-repeat;
+    background-position-x: 1em;
+    background-position-y: center;
+}

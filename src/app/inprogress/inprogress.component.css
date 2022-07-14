@@ -1,0 +1,34 @@
+.unfinished {
+    color: grey;
+}
+
+.mat-column-id {
+    width: 0.5em;
+    border-right: 1px solid currentColor;
+    padding-right: 0.5em;
+    text-align: center;
+}
+
+.mat-column-auteurs {
+    padding-left: 16px;
+    font-size: 15px;
+}
+
+.mat-column-progress {
+    padding-left: 16px;
+    font-size: 15px;
+}
+
+.mat-column-remainingWords {
+    padding-left: 16px;
+    font-size: 15px;
+}
+
+.mat-row:hover .mat-cell {
+    /* border-color: currentColor; */
+    background-color: lightblue;
+}
+
+.row-is-clicked {
+    background-color: lightblue;
+}

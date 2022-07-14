@@ -1,0 +1,26 @@
+<main class="form-signin">
+    <form [formGroup]="loginForm">
+        <h1 class="h3 mb-3 fw-normal">Sign In</h1>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" formControlName="username">
+            <label for="floatingInput">Username</label>
+            <div *ngIf="loginForm.invalid && usernameControl?.touched && usernameControl.errors">
+                <span *ngIf="usernameControl.errors['required']">Username is required</span>
+                <span *ngIf="usernameControl.errors['email']">Username must be an email</span>
+            </div>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" formControlName="password">
+            <label for="floatingPassword">Password</label>
+            <div *ngIf="loginForm.invalid && passwordControl?.touched && passwordControl.errors">
+                <span *ngIf="passwordControl.errors['required']">Password is required</span>
+                <span *ngIf="passwordControl.errors['minlength']">Password must have at least 3 characters</span>
+            </div>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" (click)="login()" type="submit" [disabled]="this.loginForm.invalid">Sign in</button>
+        <button id="cancel" class="btn btn-light btn-block" (click)="cancel()">Cancel</button>
+        <div *ngIf="errorMessage !== ''">
+            errorMessage
+        </div>
+    </form>
+</main>

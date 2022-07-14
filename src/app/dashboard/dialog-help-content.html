@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Règles</h2>
+<div mat-dialog-content class="mat-typography">
+    <h3>But du jeu</h3>
+    <p>
+        <span>Ce jeu consiste à construire des phrases avec d'autres joueurs, tout en ignorant les mots entrés par ceux-ci.<br></span>
+        <span>La phrase ainsi créée est absurde. <br></span>
+        <span>Il est inspiré de la version papier et manuscrite du <a href="https://fr.wikipedia.org/wiki/Cadavre_exquis">jeu
+        original</a>.<br></span>
+    </p>
+
+    <h3>Comment jouer</h3>
+    <p>
+        <span>Pour participer, il faut créer une nouvelle phrase, ou compléter une existante.<br></span>
+        <span>Une phrase sera toujours construite de la même manière : Un sujet, un verbe, un complément d'objet direct et un complément circonstanciel.<br></span>
+    </p>
+
+    <h4>
+        Créer une phrase :
+    </h4>
+    <p>
+        <span>Pour créer une phrase, se rendre sur le module <b>Phrase en cours</b> et cliquer sur <b>Créer</b> (vous devez être identifié).<br></span>
+        <span>Entrez un sujet en faisant preuve d'imagination, et validez votre mot.<br></span>
+        <span>Ainsi vous initialisez une nouvelle phrase, qui apparaitra cachée dans le module <b>Phrases en cours</b>.<br></span>
+        <span>D'autres joueurs pourront ainsi la compléter, et elle se dévoilera dans le module <b>Phrases terminées</b> une fois qu'elle sera complète.<br></span>
+    </p>
+    <h4>Compléter une phrase</h4>
+    <p>
+        <span>Pour compléter une phrase, se rendre dans le module <b>Phrases en cours</b> et sélectionner une des phrases.<br></span>
+        <span>Vous êtes alors invités à y ajouter un mot (ou suite de mots).<br></span>
+        <span>Si vous la finissez, celle-ci apparaitra dans le module <b>Phrases terminées</b>.<br></span>
+    </p>
+    <h3>Bonus : générer une phrase toute faite</h3>
+    <p>
+        <span>Dans le module <b>Générer une phrase aléatoirement</b>, cliquer sur <b>Générer une phrase</b> pour créée une phrase aléatoirement à partir des mots entrés par les joueurs.</span>
+    </p>
+
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Fermer</button>
+</div>

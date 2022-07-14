@@ -3,8 +3,10 @@ import { CommonModule, LocationChangeEvent } from '@angular/common';
 
 export interface IUser {
   id: number;
-  login: string;
+  username: string;
   email: string;
+  password: string;
+  token: string;
 }
 
 export interface IWord {
@@ -16,11 +18,22 @@ export interface IWord {
 export interface IPhrase {
   id: string;
   subject: IWord;
-  verb: IWord;
   directObject: IWord;
   circumstantialObject: IWord;
+  verb: IWord;
+  score:number;
+  listVotes: IVote[];
 }
 
+export interface IVote {
+  voteId: IVoteId;
+  vote: Number;
+}
+
+export interface IVoteId {
+  user: IUser;
+  phrase: IPhrase;
+}
 
 @NgModule({
   declarations: [],

@@ -1,0 +1,10 @@
+.bloc-generate-phrase {
+    padding: 1em;
+    line-height: 2em;
+}
+
+#generated-phrase {
+    margin-left: 2em;
+    font-size: large;
+    font-style: italic;
+}

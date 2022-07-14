@@ -13,8 +13,11 @@
         <div *ngIf="idPhrase ==='' ;else elseBlock">Rejoindre une des parties.</div>
 
         <ng-template #elseBlock>
+            <button style="float: right;" (click)="refresh()">
+        <mat-icon mattooltip="Rafraîchir" aria-label="Rafraîchir" color="currentColor">refresh</mat-icon>
+      </button>
             <div *ngIf="idPhrase != null ; else elseBlockNew ">
-                <div>Identifiant de la phrase : {{idPhrase}}</div>
+                <div>Identifiant de la phrase sélectionnée : <span class="is-phrase-selected">{{idPhrase}}</span></div>
             </div>
             <ng-template #elseBlockNew>
                 <div>Nouvelle phrase :</div>
@@ -24,10 +27,14 @@
                 Entrer un
                 <span class="enterword "> {{stepWord}}</span> :
 
-                <div *ngIf="stepWord=='Complément d\'objet circonstantiel'" class="hide">Exemple : Le chat mange la souris <strong>en tombant</strong></div>
-                <div *ngIf="stepWord == 'Complément d\'objet direct' " class="hide ">Exemple : Le chat mange <strong>la souris</strong> en tombant</div>
-                <div *ngIf="stepWord=='Sujet' " class="hide ">Exemple : <strong>Le chat</strong> mange la souris en tombant</div>
-                <div *ngIf="stepWord=='Verbe' " class="hide ">Exemple : Le chat <strong>mange</strong> la souris en tombant</div>
+                <div *ngIf="stepWord=='Complément d\'objet circonstantiel'" class="hide">Exemple : Le chat mange la souris
+                    <strong>en tombant</strong></div>
+                <div *ngIf="stepWord == 'Complément d\'objet direct' " class="hide ">Exemple : Le chat mange <strong>la
+            souris</strong> en tombant</div>
+                <div *ngIf="stepWord=='Sujet' " class="hide ">Exemple : <strong>Le chat</strong> mange la souris en tombant
+                </div>
+                <div *ngIf="stepWord=='Verbe' " class="hide ">Exemple : Le chat <strong>mange</strong> la souris en tombant
+                </div>
                 <input [disabled]="!userAuthorizedToEditCurrentPhrase" #wordValue (keyup.enter)="validateCurrentWord(wordValue.value);wordValue.value=''">
                 <button [disabled]="!userAuthorizedToEditCurrentPhrase" class="cadavre-button" mat-raised-button (click)="validateCurrentWord(wordValue.value);wordValue.value=''">Valider</button>
             </div>
@@ -35,7 +42,8 @@
                 <div><strong>Phrase complète ! </strong></div>
             </ng-template>
             <div *ngIf="!userAuthorizedToEditCurrentPhrase">
-                <strong>Vous n'êtes pas autorisé à compléter cette phrase à cette étape, car vous êtes l'auteur du dernier mot entré</strong>
+                <strong>Vous n'êtes pas autorisé à compléter cette phrase à cette étape, car vous êtes l'auteur du dernier mot
+          entré</strong>
             </div>
         </ng-template>
     </div>

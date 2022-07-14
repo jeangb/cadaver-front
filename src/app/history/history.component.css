@@ -5,6 +5,10 @@
     text-align: center;
 }
 
+.mat-column-votes {
+    width: 12%;
+}
+
 .mat-column-auteurs {
     padding-left: 16px;
     font-size: 15px;
@@ -21,4 +25,46 @@
     background-repeat: no-repeat;
     background-position-x: 1em;
     background-position-y: center;
+}
+
+.row-is-author-in {
+    background-color: khaki;
+}
+
+.like-button {
+    /* width: 100%;
+    height: 100%; */
+    border: 0em;
+    /* color: darkslategrey; */
+    /* float: left; */
+    background: none;
+    margin-right: -0.2em;
+}
+
+.like-button-unpressed {
+    color: grey;
+    font-size: large;
+}
+
+.like-button-pressed {
+    color: darkslategrey;
+    font-size: x-large;
+}
+
+.like-button:hover {
+    color: darkslategrey;
+    font-size: x-large;
+}
+
+.dislike-button:hover {
+    color: darkslategrey;
+    font-size: x-large;
+}
+
+.dislike-button {
+    border: 0em;
+    /* float: right; */
+    /* color: darkslategrey; */
+    background: none;
+    margin-left: -0.2em;
 }

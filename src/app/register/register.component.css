@@ -1,0 +1,30 @@
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.card-container {
+    border: 0em;
+}
+
+#profile-img {
+    /* width: 80%;
+    height: 80%; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#register-success {
+    margin-top: 1em;
+}
+
+#register-success * {
+    margin-top: 1em;
+}
+
+
+/* #btn-ok {
+    margin-top: 1em;
+} */

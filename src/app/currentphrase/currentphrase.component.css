@@ -25,3 +25,8 @@
 .cadavre-button {
     margin-left: 1em;
 }
+
+.is-phrase-selected {
+    background-color: lightblue;
+    font-weight: 800;
+}

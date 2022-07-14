@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from './../services/shared.service';
-import { Subscription } from 'rxjs';
+import { catchError, Subscription, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IPhrase } from '../models/models.module';
 import { environment } from 'src/environments/environment';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-currentphrase',
@@ -19,11 +20,12 @@ export class CurrentphraseComponent implements OnInit {
   currentWordValue: any;
   userAuthorizedToEditCurrentPhrase: boolean = false;
   idPhrase: string | null = '';
-  connectedUserId: number = 1;
+  connectedUserId: number =Number(sessionStorage.getItem("current_user_id"));
   helpVisible=false;
-  constructor(private http: HttpClient, private sharedService:SharedService) {
+  constructor(private http: HttpClient, private sharedService:SharedService,private snackBarService: SnackbarService) {
     this.clickEventPhraseSelected=    this.sharedService.getClickPhraseEvent().subscribe((value)=>{
       this.setPhrase(value);
+      this.connectedUserId=Number(sessionStorage.getItem("current_user_id"));
     })
     
     this.clickEventLogin=    this.sharedService.getClickLoginEvent().subscribe((value)=>{
@@ -44,6 +46,12 @@ export class CurrentphraseComponent implements OnInit {
     if (null != id) {
       this.idPhrase=id;
       this.http.get<IPhrase>(`${environment.apiUrl}/api/phrases/`+id)
+      .pipe(
+        catchError(() => {
+          this.snackBarService.displayMessage(`Impossible de récupérer la phrase à compléter. ${environment.msgErrorIdentifyYourself}`);
+          return throwError(() => new Error('ups sommething happend'));
+        })
+      )
       .subscribe(data => {
         this.phrase=data;
         console.log(this.phrase);
@@ -60,24 +68,21 @@ export class CurrentphraseComponent implements OnInit {
   
   async validateCurrentWord(word: string){
     let postId: string;
-    if (word !=='') {
+    if (word.trim() !=='') {
       if (this.idPhrase === null){
         this.sharedService.postNewPhrase(word, this.connectedUserId);
-        // await new Promise(f => setTimeout(f, 1000));
-        // console.log("postId dans le composant : "+postId);
-        // if(postId != null) {
-        //   this.idPhrase=postId;
-        //   this.sharedService.sendClickPhraseEvent(this.idPhrase);
-        // }
       } else {
         this.sharedService.updatePhrase(this.phrase, word, this.stepWord, this.connectedUserId);
-        // await new Promise(f => setTimeout(f, 1000));
-
-        // this.sharedService.sendClickPhraseEvent(this.phrase.id);
       }
+    } else {
+        this.snackBarService.displayMessage("Le mot entré ne doit pas être vide.");
     }
 
     
+  }
+
+  refresh(): void {
+    this.setPhrase(this.idPhrase);
   }
 }
 

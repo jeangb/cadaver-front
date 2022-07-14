@@ -1,0 +1,31 @@
+﻿<!-- Bienvenue {{user.login}} -->
+
+<div id="main">
+
+
+    <div id="bandeau">
+        <button mat-stroked-button id="help-button" (click)="openHelpDialog()" class="button-bandeau"><mat-icon mattooltip="Rafraîchir" aria-label="Rafraîchir" color = "currentColor">help</mat-icon></button>
+        <button mat-stroked-button class="button-bandeau" (click)="register()">Créer un compte</button>
+        <ng-container *ngIf="null!=userLogin ; else elseBlockNew ">
+            <button mat-stroked-button class="button-bandeau" (click)="logout()">Se déconnecter</button> Bienvenue {{userLogin}}
+        </ng-container>
+        <ng-template #elseBlockNew>
+            <button mat-stroked-button class="button-bandeau" (click)="login()">Se connecter</button>
+        </ng-template>
+    </div>
+
+    <h1>Cadavre Exquis</h1>
+    <div class="bloc">
+        <app-currentphrase></app-currentphrase>
+    </div>
+    <div class="bloc">
+        <app-inprogress></app-inprogress>
+    </div>
+    <div class="bloc">
+        <app-history></app-history>
+    </div>
+    <div class="bloc">
+        <app-randomgenerator></app-randomgenerator>
+    </div>
+    <!-- <router-outlet></router-outlet> -->
+</div>

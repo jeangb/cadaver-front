@@ -27,8 +27,14 @@
 .mat-row:hover .mat-cell {
     /* border-color: currentColor; */
     background-color: lightblue;
+    /* font-weight: 800; */
 }
 
 .row-is-clicked {
     background-color: lightblue;
+    font-weight: 800;
+}
+
+.row-is-author-in {
+    background-color: khaki;
 }

@@ -1,0 +1,29 @@
+#main {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60em;
+}
+
+#bandeau {
+    margin-top: 0.5em;
+    position: relative;
+    float: right;
+}
+
+.button-bandeau {
+    margin-left: 0.5em;
+}
+
+
+/* #help-button {
+    font-size: xx-small;
+} */
+
+.bloc {
+    margin-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+}

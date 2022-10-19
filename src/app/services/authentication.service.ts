@@ -22,7 +22,7 @@ export class AuthenticationService {
     private snackBarService: SnackbarService
   ) {}
 
-  login(username: string, password: string): Observable<any> {
+  login(username: string | null, password: string | null): Observable<any> {
     let errorMessage = '';
     const headers = {
       'Content-Type': 'application/json',
@@ -30,8 +30,8 @@ export class AuthenticationService {
       Authorization: 'Basic ' + btoa(username + ':' + password),
     };
     let user = {} as IUser;
-    user.username = username;
-    user.password = password;
+    user.username = username==null? '' : username;
+    user.password = password==null? '' : password;
 
     this.http
       .post<IUser>(`${environment.apiUrl}/authenticate`, user, { headers })
@@ -45,7 +45,7 @@ export class AuthenticationService {
           // localStorage.setItem('current_user_login', username); // virer ?
           // localStorage.setItem('current_user_id', String(data.id)); // virer ?
 
-          sessionStorage.setItem('username', username);
+          sessionStorage.setItem('username', username==null? '' : username);
           sessionStorage.setItem('current_user_id', String(data.id));
           sessionStorage.setItem('token', data.token);
 

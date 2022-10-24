@@ -2,49 +2,50 @@
     <div class="card card-container">
         <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
         <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <h1 class="h3 mb-3 fw-normal">CREATION D'UN COMPTE</h1>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel" />
                 <div class="alert-danger" *ngIf="email.errors && f.submitted">
-                    <div *ngIf="email.errors?.['required']">Email is required</div>
+                    <div *ngIf="email.errors?.['required']">L'email est obligatoire</div>
                     <div *ngIf="email.errors?.['email']">
-                        Email must be a valid email address
+                        L'email doit être une adresse valide
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">Identifiant</label>
                 <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel" />
                 <div class="alert-danger" *ngIf="username.errors && f.submitted">
-                    <div *ngIf="username.errors?.['required']">Username is required</div>
+                    <div *ngIf="username.errors?.['required']">L'identifiant est obligatoire</div>
                     <div *ngIf="username.errors?.['minlength']">
-                        Username must be at least 3 characters
+                        L'identifiant doit avoir au moins 3 caractères
                     </div>
                     <div *ngIf="username.errors?.['maxlenght']">
-                        Username must be at most 20 characters
+                        L'identifiant ne doit pas avoir plus de 20 caractères
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Mot de passe</label>
                 <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="3" #password="ngModel" />
                 <div class="alert-danger" *ngIf="password.errors && f.submitted">
-                    <div *ngIf="password.errors?.['required']">Password is required</div>
+                    <div *ngIf="password.errors?.['required']">Le mot de passe est obligatoire</div>
                     <div *ngIf="password.errors?.['minlength']">
-                        Password must be at least 3 characters
+                        Le mot de passe doit avoir au moins 3 caractères
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary btn-block">Sign Up</button>
+                <button class="btn btn-primary btn-block">S'enregistrer</button>
             </div>
-            <button id="cancel" class="btn btn-light btn-block" (click)="cancel()">Cancel</button>
+            <button id="cancel" class="btn btn-light btn-block" (click)="cancel()">Annuler</button>
             <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-                Signup failed!<br />{{ errorMessage }}
+                La création du compte est en erreur : <br />{{ errorMessage }}
             </div>
         </form>
         <div id="register-success" class="alert alert-success" *ngIf="isSuccessful">
-            <span>Your registration is successful!</span>
+            <span>La création du compte s'est bien déroulée</span>
             <button id="btn-ok" class="btn btn btn-block" (click)="login()">Ok</button>
         </div>
     </div>

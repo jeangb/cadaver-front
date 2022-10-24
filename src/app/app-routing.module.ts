@@ -7,26 +7,24 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
-    path: 'login',
-    component: LoginComponent,
-    title: 'Cadavre Exquis - Connexion',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
-    // canActivate: [AuthenticationGuard]    
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    title: 'Cadavre Exquis - Créer un compte',
-    loadChildren: () => import('./register/register.module').then(m => m.RegisterModule),
-    // canActivate: [AuthenticationGuard]    
-  },
-  {
     path: '',
     component: DashboardComponent,
     title: 'Cadavre Exquis',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthenticationGuard]    
   },
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'Cadavre Exquis - Connexion',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    title: 'Cadavre Exquis - Créer un compte',
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) 
+  }
 ];
 
 @NgModule({

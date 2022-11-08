@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
   login(): void {
     let username = this.loginForm.get('username')!.value;
     let password = this.loginForm.get('password')!.value;
-    console.log("login "+username+", password : "+password);
     // this.authenticationService.login(username, password).subscribe(() => this.router.navigateByUrl("/")
     // , err => this.errorMessage = 'err.error.message');
 

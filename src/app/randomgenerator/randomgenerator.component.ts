@@ -49,7 +49,7 @@ export class RandomgeneratorComponent implements OnInit {
         catchError(() => {
           this.generatedPhrase = null;
           this.snackBarService.displayMessage(
-            `Impossible de générer une phrase aléatoirement. ${environment.msgErrorIdentifyYourself}`
+            `Impossible de générer une phrase aléatoirement.`
           );
           return throwError(() => new Error('ups sommething happend'));
         })

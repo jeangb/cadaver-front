@@ -81,6 +81,8 @@ export class CurrentphraseComponent implements OnInit {
       .pipe(
         catchError(() => {
           this.snackBarService.displayMessage(`Impossible de récupérer la phrase à compléter. ${environment.msgErrorIdentifyYourself}`);
+          this.userAuthorizedToEditCurrentPhrase=false;
+          this.enableOrDisableLoginForm();
           return throwError(() => new Error('ups sommething happend'));
         })
       )

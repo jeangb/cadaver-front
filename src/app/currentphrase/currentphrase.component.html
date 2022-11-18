@@ -24,19 +24,25 @@
             </ng-template>
 
             <div *ngIf="stepWord !== '' ; else elseBlockFinish ">
-                Entrer un
-                <span class="enterword "> {{stepWord}}</span> :
+                <form [formGroup]="wordForm">
+                    Entrer un
+                    <span class="enterword "> {{stepWord}}</span> :
 
-                <div *ngIf="stepWord=='Complément d\'objet circonstantiel'" class="hide">Exemple : Le chat mange la souris
-                    <strong>en tombant</strong></div>
-                <div *ngIf="stepWord == 'Complément d\'objet direct' " class="hide ">Exemple : Le chat mange <strong>la
-            souris</strong> en tombant</div>
-                <div *ngIf="stepWord=='Sujet' " class="hide ">Exemple : <strong>Le chat</strong> mange la souris en tombant
-                </div>
-                <div *ngIf="stepWord=='Verbe' " class="hide ">Exemple : Le chat <strong>mange</strong> la souris en tombant
-                </div>
-                <input [disabled]="!userAuthorizedToEditCurrentPhrase" #wordValue (keyup.enter)="validateCurrentWord(wordValue.value);wordValue.value=''">
-                <button [disabled]="!userAuthorizedToEditCurrentPhrase" class="cadavre-button" mat-raised-button (click)="validateCurrentWord(wordValue.value);wordValue.value=''">Valider</button>
+                    <div *ngIf="stepWord=='Complément d\'objet circonstantiel'" class="hide">Exemple : Le chat mange la souris
+                        <strong>en tombant</strong></div>
+                    <div *ngIf="stepWord == 'Complément d\'objet direct' " class="hide ">Exemple : Le chat mange <strong>la
+              souris</strong> en tombant</div>
+                    <div *ngIf="stepWord=='Sujet' " class="hide ">Exemple : <strong>Le chat</strong> mange la souris en tombant
+                    </div>
+                    <div *ngIf="stepWord=='Verbe' " class="hide ">Exemple : Le chat <strong>mange</strong> la souris en tombant
+                    </div>
+                    <input type="text" formControlName="wordinput">
+                    <button [disabled]="!userAuthorizedToEditCurrentPhrase" class="cadavre-button" mat-raised-button (click)="validateCurrentWord()" type="submit">Saisir</button>
+                    <div *ngIf="wordForm.invalid && wordinputControl?.touched && wordinputControl.errors">
+                        <span *ngIf="wordinputControl.errors['maxlength']">Le mot doit avoir 100 caractères maximum</span>
+                        <span *ngIf="wordinputControl.errors['pattern']">Seuls les caractères alpha-numériques sont autorisés</span>
+                    </div>
+                </form>
             </div>
             <ng-template #elseBlockFinish>
                 <div><strong>Phrase complète ! </strong></div>

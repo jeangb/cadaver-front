@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { IPhrase } from '../models/models.module';
 import { environment } from 'src/environments/environment';
 import { SnackbarService } from '../services/snackbar.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-currentphrase',
@@ -17,11 +18,16 @@ export class CurrentphraseComponent implements OnInit {
   
   phrase: any;
   stepWord='Sujet';
-  currentWordValue: any;
   userAuthorizedToEditCurrentPhrase: boolean = false;
   idPhrase: string | null = '';
   connectedUserId: number =Number(sessionStorage.getItem("current_user_id"));
-  helpVisible=false;
+
+  wordValidRegex = "^[ a-zA-ZÀ-ÿ0-9\u00f1\u00d1-]*$";
+
+  wordForm = new FormGroup({
+    wordinput: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.wordValidRegex)])
+  });
+  
   constructor(private http: HttpClient, private sharedService:SharedService,private snackBarService: SnackbarService) {
     this.clickEventPhraseSelected=    this.sharedService.getClickPhraseEvent().subscribe((value)=>{
       this.setPhrase(value);
@@ -31,18 +37,44 @@ export class CurrentphraseComponent implements OnInit {
     this.clickEventLogin=    this.sharedService.getClickLoginEvent().subscribe((value)=>{
       this.connectedUserId= value;
     })
-    
   }
   
   ngOnInit(): void {
   }
-  
-  
+
+  get wordinputControl(): FormControl {
+    return this.wordForm.get('wordinput') as FormControl;
+  }
+
+  async validateCurrentWord(){
+
+    if (this.wordinputControl.errors){
+      if (this.wordinputControl.errors['required']) {
+        this.snackBarService.displayMessage("Le mot entré ne doit pas être vide.");
+      }
+      // nothing to do
+    } else {
+      let word: string | null="";
+      word = this.wordForm.get('wordinput')!.value;
+      if (null!=word && word.trim() !=='') {
+        if (this.idPhrase === null){
+          this.sharedService.postNewPhrase(word, this.connectedUserId);
+        } else {
+          this.sharedService.updatePhrase(this.phrase, word, this.stepWord, this.connectedUserId);
+        }
+      } else {
+          this.snackBarService.displayMessage("Le mot entré ne doit pas être vide.");
+      }
+      this.wordForm.reset();
+    }
+  }
+
   /**
   * Récupération de la phrase en cours.
   * @param id id de la phrase
   */
   setPhrase(id: string | null){
+    this.wordForm.reset();
     if (null != id) {
       this.idPhrase=id;
       this.http.get<IPhrase>(`${environment.apiUrl}/api/phrases/`+id)
@@ -58,27 +90,22 @@ export class CurrentphraseComponent implements OnInit {
         this.stepWord=this.sharedService.getNextStepFromPhrase(this.phrase);
         console.log(this.stepWord);
         this.userAuthorizedToEditCurrentPhrase=this.sharedService.isUserAuthorizedToEditPhrase(this.phrase, this.connectedUserId);
+        this.enableOrDisableLoginForm();
       });
     } else {
       this.idPhrase=null;
       this.stepWord="Sujet";
       this.userAuthorizedToEditCurrentPhrase=true;
+      this.enableOrDisableLoginForm()
     }
   }
   
-  async validateCurrentWord(word: string){
-    let postId: string;
-    if (word.trim() !=='') {
-      if (this.idPhrase === null){
-        this.sharedService.postNewPhrase(word, this.connectedUserId);
-      } else {
-        this.sharedService.updatePhrase(this.phrase, word, this.stepWord, this.connectedUserId);
-      }
+  enableOrDisableLoginForm() {
+    if (this.userAuthorizedToEditCurrentPhrase) {
+      this.wordForm.get('wordinput')?.enable();
     } else {
-        this.snackBarService.displayMessage("Le mot entré ne doit pas être vide.");
+      this.wordForm.get('wordinput')?.disable();
     }
-
-    
   }
 
   refresh(): void {

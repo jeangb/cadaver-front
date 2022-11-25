@@ -4,7 +4,7 @@
     <mat-label>Filtre</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Id, auteurs, progression ..." #input>
 </mat-form-field>
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" width="100%">
+<table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="desc" class="mat-elevation-z8" width="100%">
     <!--- Note that these columns can be defined in any order.
                     The actual rendered columns are set as a property on the row definition" -->
 

@@ -31,6 +31,8 @@ import {
   SnackbarService
 } from '../services/snackbar.service';
 import { VoteService } from '../services/vote.service';
+import { MatPaginator } from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-history',
@@ -44,9 +46,9 @@ export class HistoryComponent implements OnInit {
 
   clickEventRefreshHistory: Subscription;
 
-  @ViewChild(MatSort, {
-    static: true
-  }) sort: MatSort | undefined;
+  @ViewChild(MatSort, {static: true}) sort: MatSort | undefined;
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator  | undefined;
 
   constructor(
     private http: HttpClient,
@@ -59,11 +61,12 @@ export class HistoryComponent implements OnInit {
       .subscribe((value) => {
         this.ngOnInit();
       });
+
   }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource < any > ();
-
+    this.dataSource.paginator=this.paginator;
     this.http
       .get(`${environment.apiUrl}/api/phrases?full=true&withScore=true`)
       .pipe(

@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { environment } from 'src/environments/environment';
 import { catchError, Subscription, throwError } from 'rxjs';
 import { SnackbarService } from '../services/snackbar.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 export interface IInprogressArray {
   id: string;
@@ -29,6 +30,8 @@ export class InprogressComponent implements OnInit {
   clickEventRefreshInProgress: Subscription;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator  | undefined;
 
   constructor(
     private http: HttpClient,
@@ -54,6 +57,7 @@ export class InprogressComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<IInprogressArray>();
+    this.dataSource.paginator=this.paginator;
     this.http
       .get(`${environment.apiUrl}/api/phrases?full=false`)
       .pipe(

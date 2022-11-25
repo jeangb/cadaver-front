@@ -1,5 +1,6 @@
-.unfinished {
-    color: grey;
+.expansion-tab {
+    background-color: inherit;
+    border: 1px solid #ccc;
 }
 
 .mat-column-id {

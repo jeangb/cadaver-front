@@ -1,3 +1,8 @@
+.expansion-tab {
+    background-color: inherit;
+    border: 1px solid #ccc;
+}
+
 .mat-column-id {
     width: 0.5em;
     border-right: 1px solid currentColor;

@@ -1,7 +1,7 @@
 #main {
     margin-left: auto;
     margin-right: auto;
-    width: 60em;
+    width: 62em;
 }
 
 #bandeau {
@@ -14,16 +14,16 @@
     margin-left: 0.5em;
 }
 
-
-/* #help-button {
-    font-size: xx-small;
-} */
-
 .bloc {
     margin-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
     padding-bottom: 1em;
     border: 1px solid #ccc;
+    background-color: #f3f3f3;
+}
+
+.bloc-tab {
+    margin-top: 1em;
     background-color: #f3f3f3;
 }

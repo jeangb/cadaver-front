@@ -27,3 +27,11 @@
     margin-top: 1em;
     background-color: #f3f3f3;
 }
+
+#title {
+    /* font-family: Matura MT Script Capitals; */
+    /* font-family: Brush Script MT; */
+    font-family: MV Boli;
+    /* font-family: Harlow; */
+    font-size: xx-large;
+}

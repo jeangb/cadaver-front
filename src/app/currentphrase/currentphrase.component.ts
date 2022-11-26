@@ -19,6 +19,7 @@ export class CurrentphraseComponent implements OnInit {
   phrase: any;
   stepWord='Sujet';
   userAuthorizedToEditCurrentPhrase: boolean = false;
+  userConnected: boolean = false;
   idPhrase: string | null = '';
   connectedUserId: number =Number(sessionStorage.getItem("current_user_id"));
 
@@ -82,7 +83,8 @@ export class CurrentphraseComponent implements OnInit {
         catchError(() => {
           this.snackBarService.displayMessage(`Impossible de récupérer la phrase à compléter. ${environment.msgErrorIdentifyYourself}`);
           this.userAuthorizedToEditCurrentPhrase=false;
-          this.enableOrDisableLoginForm();
+          this.userConnected=false;
+          this.enableOrDisableWordForm();
           return throwError(() => new Error('ups sommething happend'));
         })
       )
@@ -91,18 +93,20 @@ export class CurrentphraseComponent implements OnInit {
         console.log(this.phrase);
         this.stepWord=this.sharedService.getNextStepFromPhrase(this.phrase);
         console.log(this.stepWord);
+        this.userConnected=true;
         this.userAuthorizedToEditCurrentPhrase=this.sharedService.isUserAuthorizedToEditPhrase(this.phrase, this.connectedUserId);
-        this.enableOrDisableLoginForm();
+        this.enableOrDisableWordForm();
       });
     } else {
       this.idPhrase=null;
       this.stepWord="Sujet";
       this.userAuthorizedToEditCurrentPhrase=true;
-      this.enableOrDisableLoginForm()
+      this.userConnected=true;
+      this.enableOrDisableWordForm()
     }
   }
   
-  enableOrDisableLoginForm() {
+  enableOrDisableWordForm() {
     if (this.userAuthorizedToEditCurrentPhrase) {
       this.wordForm.get('wordinput')?.enable();
     } else {

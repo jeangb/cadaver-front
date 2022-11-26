@@ -47,9 +47,15 @@
             <ng-template #elseBlockFinish>
                 <div><strong>Phrase complète ! </strong></div>
             </ng-template>
-            <div *ngIf="!userAuthorizedToEditCurrentPhrase">
-                <strong>Vous n'êtes pas autorisé à compléter cette phrase à cette étape, car vous êtes l'auteur du dernier mot
-          entré</strong>
+            <!-- <div *ngIf="stepWord !== '' ; else elseBlockFinish "> -->
+            <div *ngIf="!userAuthorizedToEditCurrentPhrase; ">
+                <div *ngIf="!userConnected">
+                    <strong>Vous n'êtes pas autorisé à compléter cette phrase car vous n'êtes pas connecté</strong>
+                </div>
+                <div *ngIf="userConnected">
+                    <strong>Vous n'êtes pas autorisé à compléter cette phrase à cette étape, car vous êtes l'auteur du dernier mot
+                        entré</strong>
+                </div>
             </div>
         </ng-template>
     </div>

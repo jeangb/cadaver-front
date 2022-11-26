@@ -7,7 +7,7 @@
             Cliquer sur une phrase pour la compléter
         </mat-panel-description>
     </mat-expansion-panel-header>
-    <button style="float: right;" (click)="refresh()"><mat-icon mattooltip="Rafraîchir" aria-label="Rafraîchir" color = "currentColor">refresh</mat-icon></button>
+    <button style="float: right;" title="Rafraichir le tableau" (click)="refresh()"><mat-icon mattooltip="Rafraîchir" aria-label="Rafraîchir" color = "currentColor">refresh</mat-icon></button>
     <mat-form-field appearance="standard">
         <mat-label>Filtre</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Id, auteurs, progression ..." #input>

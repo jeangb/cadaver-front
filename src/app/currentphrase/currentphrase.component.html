@@ -13,7 +13,7 @@
         <div *ngIf="idPhrase ==='' ;else elseBlock">Ou compléter une phrase 🢃</div>
 
         <ng-template #elseBlock>
-            <button style="float: right;" (click)="refresh()">
+            <button style="float: right;" title="Rafraichir la phrase sélectionnée" (click)="refresh()">
         <mat-icon mattooltip="Rafraîchir" aria-label="Rafraîchir" color="currentColor">refresh</mat-icon>
       </button>
             <div *ngIf="idPhrase != null ; else elseBlockNew ">

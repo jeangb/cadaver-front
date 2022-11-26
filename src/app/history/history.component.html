@@ -24,7 +24,7 @@
 
         <ng-container matColumnDef="phrase">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Phrase </th>
-            <td mat-cell *matCellDef="let element"> {{ element.phrase }} </td>
+            <td mat-cell *matCellDef="let element"> {{ element.phrase | finishedFormattedPhrase}} </td>
         </ng-container>
 
         <ng-container matColumnDef="auteurs">

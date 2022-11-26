@@ -99,8 +99,7 @@ export class HistoryComponent implements OnInit {
             ' ' +
             phraseElement.directObject.libelle +
             ' ' +
-            phraseElement.circumstantialObject.libelle +
-            '.';
+            phraseElement.circumstantialObject.libelle;
 
           let model = {
             id: phraseElement.id,

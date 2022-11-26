@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { FinishedFormattedPhrasePipe } from '../custompipes/finished-formatted-phrase.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     InprogressComponent,
     CurrentphraseComponent,
     RandomgeneratorComponent,
-    DialogContentExampleDialog
+    DialogContentExampleDialog,
+    FinishedFormattedPhrasePipe
   ],
   imports: [
     CommonModule,

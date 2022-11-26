@@ -92,18 +92,9 @@ export class HistoryComponent implements OnInit {
             (n, i) => myData.indexOf(n) === i
           );
 
-          let phrase =
-            phraseElement.subject.libelle +
-            ' ' +
-            phraseElement.verb.libelle +
-            ' ' +
-            phraseElement.directObject.libelle +
-            ' ' +
-            phraseElement.circumstantialObject.libelle;
-
           let model = {
             id: phraseElement.id,
-            phrase: phrase,
+            phrase: phraseElement,
             votes: phraseElement.score,
             auteurs: distinctArray.join(', '),
             isAuthorIn: this.sharedService.isConnectedUserPartOfAuthors(phraseElement, sessionStorage.getItem('current_user_id')),

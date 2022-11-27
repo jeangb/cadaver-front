@@ -5,18 +5,27 @@ import { IPhrase } from '../models/models.module';
 export class FinishedFormattedPhrasePipe implements PipeTransform {
 
   transform(phraseElement: IPhrase, ...args: unknown[]): unknown {
-    let phrase =
-            phraseElement.subject.libelle +
-            ' ' +
-            phraseElement.verb.libelle +
-            ' ' +
-            phraseElement.directObject.libelle +
-            ' ' +
-            phraseElement.circumstantialObject.libelle;
-    
-    const formattedPhrase = phrase.charAt(0).toUpperCase() + phrase.slice(1)+".";
 
-    return formattedPhrase;
+    debugger;
+    let formattedSubject = phraseElement.subject.libelle.charAt(0).toUpperCase()
+    + phraseElement.subject.libelle.slice(1);
+
+    let formattedVerb=phraseElement.verb.libelle.charAt(0).toLowerCase()
+    + phraseElement.verb.libelle.slice(1);
+
+    let directObject=phraseElement.directObject.libelle;
+
+    let formattedCircumstantialObject=phraseElement.circumstantialObject.libelle.charAt(0).toLowerCase()
+    + phraseElement.circumstantialObject.libelle.slice(1);    
+    let phrase = formattedSubject + ' ' +
+      formattedVerb +
+      ' ' +
+      directObject +
+      ' ' +
+      formattedCircumstantialObject
+      +'.';
+    
+    return phrase;
   }
 
 }

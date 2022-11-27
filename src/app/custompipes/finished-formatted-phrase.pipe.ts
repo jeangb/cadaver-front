@@ -5,8 +5,6 @@ import { IPhrase } from '../models/models.module';
 export class FinishedFormattedPhrasePipe implements PipeTransform {
 
   transform(phraseElement: IPhrase, ...args: unknown[]): unknown {
-
-    debugger;
     let formattedSubject = phraseElement.subject.libelle.charAt(0).toUpperCase()
     + phraseElement.subject.libelle.slice(1);
 

@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IPhrase, IUser, IWord } from '../models/models.module';
 import { SnackbarService } from './snackbar.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,9 @@ export class SharedService {
 
   constructor(
     private http: HttpClient,
-    private snackBarService: SnackbarService
+    private snackBarService: SnackbarService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   sendClickPhraseEvent(id: string | null) {
@@ -210,6 +213,44 @@ export class SharedService {
           );
           return null;
         },
+      });
+  }
+
+
+  /**
+   * Récupère dans les query params
+   * l'id_phrase s'il existe, puis scroll et met le focus sur la phrase correspondant.
+   */
+  public scrollAndFocusToPhraseFromQueryParam():void {
+    this.route.queryParams
+      .subscribe(params => {
+        // Récupère dans les querys params l'id de la phrase
+        let id = "phrase_" + params['id_phrase'];
+
+        // Cherche dans le DOM la phrase correspondant à l'id
+        let getMeTo = document.getElementById(id);
+        if (null !== getMeTo) {
+
+          // Scroll sur la phrase
+          getMeTo.scrollIntoView({
+            behavior: 'smooth'
+          });
+          let parentTr = getMeTo.parentElement;
+
+          // Highlight (à l'aide de css) la ligne du tableau correspondant à la phrase
+          if (null != parentTr) {
+            let classParent = parentTr.getAttribute("class");
+            parentTr.setAttribute("class", classParent + " row-is-redirected-to");
+          }
+
+          // Supprime dans l'URL les querys params
+          this.router.navigate([], {
+            queryParams: {
+              'id_phrase': null
+            },
+            queryParamsHandling: 'merge'
+          });
+        }
       });
   }
 }

@@ -107,6 +107,13 @@ export class HistoryComponent implements OnInit {
       });
   }
 
+  /**
+   * Une fois que le composant est chargé, on récupère dans les query params
+   * l'id_phrase s'il existe, et on scroll et focus sur la phrase correspondant.
+   */
+  ngAfterViewChecked(): void {
+    this.sharedService.scrollAndFocusToPhraseFromQueryParam();
+  }
 
   hasAuthorVotedOnPhrase(currentUserId: string | null, listVotes: IVote[]) {
     if (listVotes.length == 0 || currentUserId == null) {

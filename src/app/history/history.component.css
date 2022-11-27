@@ -37,6 +37,36 @@
     background-color: khaki;
 }
 
+@-o-keyframes fadeIt {
+    0% {
+        background-color: #f8012a;
+    }
+    50% {
+        background-color: #fae900;
+    }
+    100% {
+        background-color: #f8012a;
+    }
+}
+
+@keyframes fadeIt {
+    0% {
+        background-color: #f8012a;
+    }
+    50% {
+        background-color: #fae900;
+    }
+    100% {
+        background-color: #f8012a;
+    }
+}
+
+.row-is-redirected-to {
+    background-image: none !important;
+    -o-animation: fadeIt 5s ease-in-out;
+    animation: fadeIt 5s ease-in-out;
+}
+
 .like-button {
     /* width: 100%;
     height: 100%; */

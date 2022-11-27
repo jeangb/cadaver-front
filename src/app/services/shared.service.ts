@@ -208,11 +208,16 @@ export class SharedService {
           }
         },
         error: (error) => {
-          console.error('There was an error!', error);
-          this.snackBarService.displayMessage(
-            `Impossible d'entrer le mot. ${environment.msgErrorIdentifyYourself}`
-          );
-          return null;
+          if (401===error.status) {
+            console.error('There was an error!', error);
+            this.snackBarService.displayMessage(
+            "Impossible d'entrer le mot. "+error.error);
+          }else {
+            console.error('There was an error!', error);
+            this.snackBarService.displayMessage(
+              `Impossible d'entrer le mot. ${environment.msgErrorIdentifyYourself}`
+            );
+          }
         },
       });
   }

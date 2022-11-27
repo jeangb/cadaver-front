@@ -204,6 +204,7 @@ export class SharedService {
 
           if (data.circumstantialObject != null) {
             this.sendClickRefreshHistory();
+            this.scrollAndFocusToPhraseFromId(data.id);
           }
         },
         error: (error) => {
@@ -227,22 +228,9 @@ export class SharedService {
         // Récupère dans les querys params l'id de la phrase
         let id = "phrase_" + params['id_phrase'];
 
-        // Cherche dans le DOM la phrase correspondant à l'id
-        let getMeTo = document.getElementById(id);
-        if (null !== getMeTo) {
-
-          // Scroll sur la phrase
-          getMeTo.scrollIntoView({
-            behavior: 'smooth'
-          });
-          let parentTr = getMeTo.parentElement;
-
-          // Highlight (à l'aide de css) la ligne du tableau correspondant à la phrase
-          if (null != parentTr) {
-            let classParent = parentTr.getAttribute("class");
-            parentTr.setAttribute("class", classParent + " row-is-redirected-to");
-          }
-
+        // Scroll et met le focus sur la phrase
+        let scrollOk=this.scrollAndFocusToPhraseFromId(id);
+        if (scrollOk) {
           // Supprime dans l'URL les querys params
           this.router.navigate([], {
             queryParams: {
@@ -252,5 +240,28 @@ export class SharedService {
           });
         }
       });
+  }
+
+  public scrollAndFocusToPhraseFromId(idPhrase: string):boolean {
+    // Cherche dans le DOM la phrase correspondant à l'id
+    let getMeTo = document.getElementById(idPhrase);
+    if (null !== getMeTo) {
+
+      // Scroll sur la phrase
+      getMeTo.scrollIntoView({
+        behavior: 'smooth'
+      });
+      let parentTr = getMeTo.parentElement;
+
+      // Highlight (à l'aide de css) la ligne du tableau correspondant à la phrase
+      if (null != parentTr) {
+        let classParent = parentTr.getAttribute("class");
+        parentTr.setAttribute("class", classParent + " row-is-redirected-to");
+
+        return true;
+      }
+    }
+
+    return false;
   }
 }

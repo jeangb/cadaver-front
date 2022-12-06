@@ -94,7 +94,7 @@ export class HistoryComponent implements OnInit {
 
           let model = {
             id: phraseElement.id,
-            phrase: phraseElement,
+            phrase: this.getLibelleFromPhrase(phraseElement),
             votes: phraseElement.score,
             auteurs: distinctArray.join(', '),
             isAuthorIn: this.sharedService.isConnectedUserPartOfAuthors(phraseElement, sessionStorage.getItem('current_user_id')),
@@ -105,6 +105,28 @@ export class HistoryComponent implements OnInit {
           this.dataSource.sort = this.sort;
         });
       });
+  }
+
+  getLibelleFromPhrase(phraseElement: IPhrase): string {
+    let formattedSubject = phraseElement.subject.libelle.charAt(0).toUpperCase()
+    + phraseElement.subject.libelle.slice(1);
+
+    let formattedVerb=phraseElement.verb.libelle.charAt(0).toLowerCase()
+    + phraseElement.verb.libelle.slice(1);
+
+    let directObject=phraseElement.directObject.libelle;
+
+    let formattedCircumstantialObject=phraseElement.circumstantialObject.libelle.charAt(0).toLowerCase()
+    + phraseElement.circumstantialObject.libelle.slice(1);    
+    let phrase = formattedSubject + ' ' +
+      formattedVerb +
+      ' ' +
+      directObject +
+      ' ' +
+      formattedCircumstantialObject
+      +'.';
+    
+    return phrase;
   }
 
   /**

@@ -23,7 +23,7 @@ export class CurrentphraseComponent implements OnInit {
   idPhrase: string | null = '';
   connectedUserId: number =Number(sessionStorage.getItem("current_user_id"));
 
-  wordValidRegex = "^[ a-zA-ZÀ-ÿ0-9\u00f1\u00d1-]*$";
+  wordValidRegex = "^[ 'a-zA-ZÀ-ÿ0-9\u00f1\u00d1-]*$";
 
   wordForm = new FormGroup({
     wordinput: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.wordValidRegex)])

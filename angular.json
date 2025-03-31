@@ -101,5 +101,8 @@
             }
         }
     },
-    "defaultProject": "cadaver-front"
+    "defaultProject": "cadaver-front",
+    "cli": {
+      "analytics": false
+    }
 }

@@ -2,12 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IPhrase } from '../models/models.module';
 import { SharedService } from './../services/shared.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource as MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { environment } from 'src/environments/environment';
 import { catchError, Subscription, throwError } from 'rxjs';
 import { SnackbarService } from '../services/snackbar.service';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator as MatPaginator } from '@angular/material/paginator';
 
 export interface IInprogressArray {
   id: string;

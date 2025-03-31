@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogContent} from '@angular/material/dialog';
+import { MatDialog as MatDialog, MatDialogContent as MatDialogContent} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { IUser } from '../models/models.module';
 import { AuthenticationService } from '../services/authentication.service';

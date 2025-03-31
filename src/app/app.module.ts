@@ -5,8 +5,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthenticationInterceptor } from './authentication.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule as MatDialogModule} from '@angular/material/dialog';
+import { MatPaginatorModule as MatPaginatorModule} from '@angular/material/paginator';
 
 // const routes: Routes = [
 //   { path: 'accueil', component: FakeloginComponent},

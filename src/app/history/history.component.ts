@@ -11,8 +11,8 @@ import {
   IVote
 } from '../models/models.module';
 import {
-  MatTableDataSource
-} from '@angular/material/table';
+  MatLegacyTableDataSource as MatTableDataSource
+} from '@angular/material/legacy-table';
 import {
   MatSort
 } from '@angular/material/sort';
@@ -31,7 +31,7 @@ import {
   SnackbarService
 } from '../services/snackbar.service';
 import { VoteService } from '../services/vote.service';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 
 
 @Component({

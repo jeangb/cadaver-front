@@ -66,10 +66,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "cadaver-front:build:production"
+                          "buildTarget": "cadaver-front:build:production"
                         },
                         "development": {
-                            "browserTarget": "cadaver-front:build:development"
+                          "buildTarget": "cadaver-front:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -77,7 +77,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "cadaver-front:build"
+                      "buildTarget": "cadaver-front:build"
                     }
                 },
                 "test": {

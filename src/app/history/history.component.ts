@@ -43,13 +43,13 @@ export class HistoryComponent implements OnInit {
   phraseData: any;
   dataSource: any;
   displayedColumns = ['id', 'phrase', 'votes', 'auteurs'];
-
+  
   clickEventRefreshHistory: Subscription;
-
+  
   @ViewChild(MatSort, {static: true}) sort: MatSort | undefined;
-
+  
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator  | undefined;
-
+  
   constructor(
     private http: HttpClient,
     private sharedService: SharedService,
@@ -57,86 +57,86 @@ export class HistoryComponent implements OnInit {
     private voteService: VoteService
   ) {
     this.clickEventRefreshHistory = this.sharedService
-      .getClickRefreshHistory()
-      .subscribe((value) => {
-        this.ngOnInit();
-      });
-
+    .getClickRefreshHistory()
+    .subscribe((value) => {
+      this.ngOnInit();
+    });
+    
   }
-
+  
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource < any > ();
     this.dataSource.paginator=this.paginator;
     this.http
-      .get(`${environment.apiUrl}/api/phrases?full=true&withScore=true`)
-      .pipe(
-        catchError(() => {
-          this.snackBarService.displayMessage(
-            `Impossible de récupérer l'historique des phrases. ${environment.msgErrorIdentifyYourself}`
-          );
-          return throwError(() => new Error('ups sommething happend'));
-        })
-      )
-      .subscribe((data) => {
-        // Assign the data to the data source for the table to render
-        this.phraseData = data;
-        const ids = [];
-
-        this.phraseData.forEach((phraseElement: IPhrase) => {
-          let myData = new Array < string > ();
-          myData.push(phraseElement.subject.user.username);
-          myData.push(phraseElement.verb.user.username);
-          myData.push(phraseElement.directObject.user.username);
-          myData.push(phraseElement.circumstantialObject.user.username);
-          const distinctArray = myData.filter(
-            (n, i) => myData.indexOf(n) === i
-          );
-
-          let model = {
-            id: phraseElement.id,
-            phrase: this.getLibelleFromPhrase(phraseElement),
-            votes: phraseElement.score,
-            auteurs: distinctArray.join(', '),
-            isAuthorIn: this.sharedService.isConnectedUserPartOfAuthors(phraseElement, sessionStorage.getItem('current_user_id')),
-            hasAuthorGaveThumbUp: this.hasAuthorThumbedUpPhrase(sessionStorage.getItem('current_user_id'), phraseElement.listVotes),
-            hasAuthorGaveThumbDown: this.hasAuthorThumbedDownPhrase(sessionStorage.getItem('current_user_id'), phraseElement.listVotes),
-          }; //get the model from the form
-          this.dataSource.data.push(model);
-          this.dataSource.sort = this.sort;
-        });
+    .get(`${environment.apiUrl}/api/phrases?full=true&withScore=true`)
+    .pipe(
+      catchError(() => {
+        this.snackBarService.displayMessage(
+          `Impossible de récupérer l'historique des phrases. ${environment.msgErrorIdentifyYourself}`
+        );
+        return throwError(() => new Error('ups sommething happend'));
+      })
+    )
+    .subscribe((data) => {
+      // Assign the data to the data source for the table to render
+      this.phraseData = data;
+      const ids = [];
+      
+      this.phraseData.forEach((phraseElement: IPhrase) => {
+        let myData = new Array < string > ();
+        myData.push(phraseElement.subject.user.username);
+        myData.push(phraseElement.verb.user.username);
+        myData.push(phraseElement.directObject.user.username);
+        myData.push(phraseElement.circumstantialObject.user.username);
+        const distinctArray = myData.filter(
+          (n, i) => myData.indexOf(n) === i
+        );
+        
+        let model = {
+          id: phraseElement.id,
+          phrase: this.getLibelleFromPhrase(phraseElement),
+          votes: phraseElement.score,
+          auteurs: distinctArray.join(', '),
+          isAuthorIn: this.sharedService.isConnectedUserPartOfAuthors(phraseElement, sessionStorage.getItem('current_user_id')),
+          hasAuthorGaveThumbUp: this.hasAuthorThumbedUpPhrase(sessionStorage.getItem('current_user_id'), phraseElement.listVotes),
+          hasAuthorGaveThumbDown: this.hasAuthorThumbedDownPhrase(sessionStorage.getItem('current_user_id'), phraseElement.listVotes),
+        }; //get the model from the form
+        this.dataSource.data.push(model);
+        this.dataSource.sort = this.sort;
       });
+    });
   }
-
+  
   getLibelleFromPhrase(phraseElement: IPhrase): string {
     let formattedSubject = phraseElement.subject.libelle.charAt(0).toUpperCase()
     + phraseElement.subject.libelle.slice(1);
-
+    
     let formattedVerb=phraseElement.verb.libelle.charAt(0).toLowerCase()
     + phraseElement.verb.libelle.slice(1);
-
+    
     let directObject=phraseElement.directObject.libelle;
-
+    
     let formattedCircumstantialObject=phraseElement.circumstantialObject.libelle.charAt(0).toLowerCase()
     + phraseElement.circumstantialObject.libelle.slice(1);    
     let phrase = formattedSubject + ' ' +
-      formattedVerb +
-      ' ' +
-      directObject +
-      ' ' +
-      formattedCircumstantialObject
-      +'.';
+    formattedVerb +
+    ' ' +
+    directObject +
+    ' ' +
+    formattedCircumstantialObject
+    +'.';
     
     return phrase;
   }
-
+  
   /**
-   * Une fois que le composant est chargé, on récupère dans les query params
-   * l'id_phrase s'il existe, et on scroll et focus sur la phrase correspondant.
-   */
+  * Une fois que le composant est chargé, on récupère dans les query params
+  * l'id_phrase s'il existe, et on scroll et focus sur la phrase correspondant.
+  */
   ngAfterViewChecked(): void {
     this.sharedService.scrollAndFocusToPhraseFromQueryParam();
   }
-
+  
   hasAuthorVotedOnPhrase(currentUserId: string | null, listVotes: IVote[]) {
     if (listVotes.length == 0 || currentUserId == null) {
       return false;
@@ -146,15 +146,15 @@ export class HistoryComponent implements OnInit {
       }).length > 0;
     }
   }
-
+  
   hasAuthorThumbedUpPhrase(currentUserId: string | null, listVotes: IVote[]) {
     return this.hasAuthorVotedForPhraseWithVote(currentUserId, listVotes, 1);
   }
-
+  
   hasAuthorThumbedDownPhrase(currentUserId: string | null, listVotes: IVote[]) {
     return this.hasAuthorVotedForPhraseWithVote(currentUserId, listVotes, -1);
   }
-
+  
   hasAuthorVotedForPhraseWithVote(currentUserId: string | null, listVotes: IVote[], voteValue: number) {
     if (listVotes.length == 0 || currentUserId == null) {
       return false;
@@ -164,22 +164,22 @@ export class HistoryComponent implements OnInit {
       }).length > 0;
     }
   }
-
-
+  
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
+  
   refresh(): void {
     this.ngOnInit();
   }
-
+  
   thumbUp(entry: any) {
     if (null === sessionStorage.getItem('current_user_id')) {
       this.snackBarService.displayMessage(`Impossible de voter. ${environment.msgErrorIdentifyYourself}`);
     } else {
-
+      
       let idUSer = Number(sessionStorage.getItem('current_user_id'));
       const observer = {
         next: (x: IVote) => {
@@ -189,11 +189,11 @@ export class HistoryComponent implements OnInit {
           this.voteService.addVoteById(idUSer, entry.id, 1).subscribe()
         }
       };
-
+      
       this.voteService.existsByIdAndVoteValue(idUSer, entry.id, 1).subscribe(observer);
-
+      
       let incrementVote = 0;
-
+      
       // Update votes button status
       if (entry.hasAuthorGaveThumbUp) {
         entry.hasAuthorGaveThumbUp = false;
@@ -206,18 +206,18 @@ export class HistoryComponent implements OnInit {
         incrementVote = 2;
       }
       entry.hasAuthorGaveThumbDown = false;
-
+      
       // Update score vote
       entry.votes = entry.votes + incrementVote;
     }
   }
-
+  
   thumbDown(entry: any) {
     if (null === sessionStorage.getItem('current_user_id')) {
       this.snackBarService.displayMessage(`Impossible de voter. ${environment.msgErrorIdentifyYourself}`);
     } else {
       let idUSer = Number(sessionStorage.getItem('current_user_id'));
-
+      
       const observer = {
         next: (x: IVote) => {
           this.voteService.deleteVoteById(idUSer, entry.id).subscribe();
@@ -226,10 +226,10 @@ export class HistoryComponent implements OnInit {
           this.voteService.addVoteById(idUSer, entry.id, -1).subscribe()
         }
       };
-
+      
       this.voteService.existsByIdAndVoteValue(idUSer, entry.id, -1).subscribe(observer);
       let incrementVote = 0;
-
+      
       // Update votes button status
       if (entry.hasAuthorGaveThumbDown) {
         entry.hasAuthorGaveThumbDown = false;
@@ -242,7 +242,7 @@ export class HistoryComponent implements OnInit {
         incrementVote = -2;
       }
       entry.hasAuthorGaveThumbUp = false;
-
+      
       // Update score vote
       entry.votes = entry.votes + incrementVote;
     }

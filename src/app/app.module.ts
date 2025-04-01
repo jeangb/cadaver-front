@@ -1,7 +1,7 @@
 ﻿import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthenticationInterceptor } from './authentication.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -13,22 +13,17 @@ import { MatPaginatorModule as MatPaginatorModule} from '@angular/material/pagin
 //   { path: 'login', component: LoginComponent}
 // ]
 
-@NgModule({
-  declarations: [
-    AppComponent],
-  imports: [
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    MatPaginatorModule
-    
-    // RouterModule.forRoot(routes),
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent
+    ],
+    bootstrap: [AppComponent], imports: [AppRoutingModule,
+        BrowserAnimationsModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        MatPaginatorModule
+        // RouterModule.forRoot(routes),
+    ], providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }

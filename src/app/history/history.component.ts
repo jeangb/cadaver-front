@@ -31,7 +31,7 @@ import {
   SnackbarService
 } from '../services/snackbar.service';
 import { VoteService } from '../services/vote.service';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatPaginator as MatPaginator } from '@angular/material/paginator';
 
 
 @Component({

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogContent} from '@angular/material/dialog';
+import { MatDialog as MatDialog, MatDialogContent as MatDialogContent} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { IUser } from '../models/models.module';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css'],
+    standalone: false
 })
 export class DashboardComponent implements OnInit {
 
@@ -56,7 +57,8 @@ export class DashboardComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-help-content',
-  templateUrl: 'dialog-help-content.html',
+    selector: 'dialog-help-content',
+    templateUrl: 'dialog-help-content.html',
+    standalone: false
 })
 export class DialogContentExampleDialog {}

@@ -33,9 +33,10 @@ import { MatPaginator as MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css'],
+    selector: 'app-history',
+    templateUrl: './history.component.html',
+    styleUrls: ['./history.component.css'],
+    standalone: false
 })
 export class HistoryComponent implements OnInit {
   phraseData: any;

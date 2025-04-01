@@ -18,9 +18,10 @@ import {
 } from '../services/snackbar.service';
 
 @Component({
-  selector: 'app-randomgenerator',
-  templateUrl: './randomgenerator.component.html',
-  styleUrls: ['./randomgenerator.component.css']
+    selector: 'app-randomgenerator',
+    templateUrl: './randomgenerator.component.html',
+    styleUrls: ['./randomgenerator.component.css'],
+    standalone: false
 })
 export class RandomgeneratorComponent implements OnInit {
 

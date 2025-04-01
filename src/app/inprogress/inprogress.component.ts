@@ -17,9 +17,10 @@ export interface IInprogressArray {
 }
 
 @Component({
-  selector: 'app-inprogress',
-  templateUrl: './inprogress.component.html',
-  styleUrls: ['./inprogress.component.css'],
+    selector: 'app-inprogress',
+    templateUrl: './inprogress.component.html',
+    styleUrls: ['./inprogress.component.css'],
+    standalone: false
 })
 export class InprogressComponent implements OnInit {
   phraseData: any;

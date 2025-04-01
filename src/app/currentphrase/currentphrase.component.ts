@@ -8,9 +8,10 @@ import { SnackbarService } from '../services/snackbar.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-currentphrase',
-  templateUrl: './currentphrase.component.html',
-  styleUrls: ['./currentphrase.component.css']
+    selector: 'app-currentphrase',
+    templateUrl: './currentphrase.component.html',
+    styleUrls: ['./currentphrase.component.css'],
+    standalone: false
 })
 export class CurrentphraseComponent implements OnInit {
   clickEventPhraseSelected:Subscription;

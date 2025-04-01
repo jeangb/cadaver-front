@@ -11,8 +11,8 @@ import {
   IVote
 } from '../models/models.module';
 import {
-  MatLegacyTableDataSource as MatTableDataSource
-} from '@angular/material/legacy-table';
+  MatTableDataSource as MatTableDataSource
+} from '@angular/material/table';
 import {
   MatSort
 } from '@angular/material/sort';
